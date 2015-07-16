@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo WS</title>
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  window.socket = io('http://localhost:8081');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('e', { my: 'dat' });
+  });
+  socket.on("tweet", function(tweet) {
+  	console.log("tweet from", tweet.user);
+  	console.log("contents:", tweet.text);
+  	socket.emit("tweet",tweet);
+  	socket.disconnect();
+  });
+</script>
+</body>
+</html>
